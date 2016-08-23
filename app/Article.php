@@ -10,7 +10,7 @@ class Article extends Model
     protected $fillable=[
         'title',
         'body',
-        'published_at'
+        'published_at',
     ];
 
     protected $dates=['published_at'];//dates be carbon parse timestamps
@@ -24,5 +24,12 @@ class Article extends Model
     // setAddressAttribute
     public function setPublishedAtAttribute($date){
         $this->attributes['published_at'] = Carbon::createFromFormat('Y-m-d',$date);
+    }
+
+    /**
+    * An article is owned by a user
+    **/
+    public function user(){
+        return $this->belongsTo('App\User');
     }
 }
